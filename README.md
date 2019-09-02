@@ -1,5 +1,7 @@
 ﻿# This is a simple project to learn react http with Axios
 
+This project also includes react-router-dom routing examples including lazy loading.
+
 This project was developed along with the React - Complete Guide course at https://www.udemy.com/react-the-complete-guide-incl-redux/ 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
