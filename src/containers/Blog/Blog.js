@@ -3,14 +3,20 @@ import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from './Posts/Posts';
-import NewPost from './NewPost/NewPost';
-// import FullPost from './FullPost/FullPost';
+
+// Using a dynamic import for lazy loading
+// import NewPost from './NewPost/NewPost';
+import asyncComponent from '../../hoc/asyncComponent';
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+})
+
+
 
 
 class Blog extends Component {
     state = {
-        selectedPostId: null,
-        error: false
+        auth: false
     }
 
 
@@ -57,10 +63,18 @@ class Blog extends Component {
                     Switch limits to only firing one route, by default React would load all that match
                 */}
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    {/* {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null} */}
+                    {/* <Route path="/new-post" component={NewPost} /> */}
+                    <Route path="/new-post" component={AsyncNewPost} />
                     <Route path="/posts" component={Posts} />
+                    {/* 
+                        To catch any unknown route without a path, a 404 error
+                        NOTE: it won't work along with a Redirect from "/"
+
+                     */}
+                    <Route render={() => <h1>Not found</h1>} />
                     {/* <Route path="/" component={Posts} /> */}
-                    <Redirect from="/" to="/posts" />
+                    {/* <Redirect from="/" to="/posts" /> */}
                 </Switch>
 
 
