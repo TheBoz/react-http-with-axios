@@ -7,6 +7,8 @@ class App extends Component {
   render() {
     return (
       // Wrap with Browser Router to turn on routing
+      // When deploying, may need to set basename
+      // <BrowserRouter basename="/my-app">
       <BrowserRouter>
         <div className="App">
           <Blog />
